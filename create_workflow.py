@@ -13,7 +13,7 @@ def parse() -> None:
     # CLI call parser
     parser = argparse.ArgumentParser(
         prog="create_workflow.py",
-        description="Tool to create a workflow itinerary",
+        description="Tool to create a itinerary workflow",
         epilog="",
     )
 
@@ -60,7 +60,7 @@ def parse() -> None:
         default="false",
         action="store",
         dest="update",
-        help="true if you want to update existent stored data (in this case, behavior_if_exists=DELETE need to be defined for offering in the config file)",
+        help="true if you want to update existent stored data",
         required=False,
     )
 
@@ -213,20 +213,16 @@ def creation_workflow(args) -> str :
             "mise-en-base": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement nommé "Intégration de données vecteur livrées en base"
                             "processing": "{store_entity.processing.infos._id [INFOS(name=Intégration de données vecteur livrées en base)]}",
                             "inputs": {
                                 "upload": [
-                                    // On récupère l'id de la Livraison associée grâce à son nom
                                     "{store_entity.upload.infos._id [INFOS(name=''' + args.upload + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On crée une nouvelle Donnée Stockée
                                     "name": "''' + args.stored_data_database + '''"
                                 }
                             },
@@ -234,7 +230,6 @@ def creation_workflow(args) -> str :
                             
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Ajout d'un département de la BDTopo"
                         ]
@@ -247,20 +242,16 @@ def creation_workflow(args) -> str :
             "vector-db-to-pivot-road2": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement
                             "processing": "{store_entity.processing.infos._id [INFOS(name=vector-db-to-pivot-road2)]}",
                             "inputs": {
                                 "stored_data": [
-                                    // On récupère l'id de la donnée stockée de type VECTOR-DB
                                     "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_database + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On crée une nouvelle Donnée Stockée
                                     "name": "''' + args.stored_data_pivot + '''",
                                     "storage_tags": ["IGN","VECTEUR"]
                                 }
@@ -269,7 +260,6 @@ def creation_workflow(args) -> str :
                             
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Création de base pivot Road2"
                         ]
@@ -283,20 +273,16 @@ def creation_workflow(args) -> str :
             "pivot-road2-to-graph-valhalla": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement
                             "processing": "{store_entity.processing.infos._id [INFOS(name=pivot-road2-to-graph-valhalla)]}",
                             "inputs": {
                                 "stored_data": [
-                                    // On récupère l'id de la donnée stockée de type pivot ROAD2
                                     "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_pivot + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On crée une nouvelle Donnée Stockée
                                     "name": "''' + args.stored_data_graph_valhalla + '''",
                                     "storage_tags": ["OTHERS","PERF"]
                                 }
@@ -426,7 +412,6 @@ def creation_workflow(args) -> str :
                                 ]
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Création d'un graph valhalla'"
                         ]
@@ -491,7 +476,6 @@ def creation_workflow(args) -> str :
                                 }
                             }
                         },
-                        // Liste des commentaires ajoutés à la Configuration
                         "comments": [
                             "Configuration d'un flux itinéraire valhalla"
                         ]
@@ -506,11 +490,9 @@ def creation_workflow(args) -> str :
                     {
                         "type": "offering",
                         "url_parameters": {
-                            // On récupère l'id de la Configuration créée à l'étape précédente grâce à son nom et l'un de ses tags
                             "configuration": "{store_entity.configuration.infos._id [INFOS(name=''' + args.configuration_name_valhalla + ''')]}"
                         },
                         "body_parameters": {
-                            // Endpoint de type itineraire
                             "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
                             "visibility": "PUBLIC",
                             "open": true
@@ -524,20 +506,16 @@ def creation_workflow(args) -> str :
             "pivot-road2-to-graph-valhalla": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement
                             "processing": "{store_entity.processing.infos._id [INFOS(name=pivot-road2-to-graph-valhalla)]}",
                             "inputs": {
                                 "stored_data": [
-                                    // On récupère l'id de la donnée stockée de type pivot ROAD2
                                     "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_pivot + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On récupère la donnée stockée à modifier
                                     "id": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]}"
                                 }
                             },
@@ -666,7 +644,6 @@ def creation_workflow(args) -> str :
                                 ]
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Création d'un graph valhalla'"
                         ]
@@ -679,11 +656,9 @@ def creation_workflow(args) -> str :
                     {
                         "type": "offering",
                         "url_parameters": {
-                            // On récupère l'id de la Configuration créée à l'étape précédente grâce à son nom et l'un de ses tags
                             "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]})]}"
                         },
                         "body_parameters": {
-                            // Endpoint de type itineraire
                             "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
                             "visibility": "PUBLIC",
                             "open": true
@@ -697,20 +672,16 @@ def creation_workflow(args) -> str :
             "pivot-road2-to-graph-db": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement
                             "processing": "{store_entity.processing.infos._id [INFOS(name=pivot-road2-to-graph-db)]}",
                             "inputs": {
                                 "stored_data": [
-                                    // On récupère l'id de la donnée stockée de type pivot ROAD2
                                     "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_pivot + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On crée une nouvelle Donnée Stockée
                                     "name": "''' + args.stored_data_graph_valhalla + '''",
                                     "storage_tags": ["IGN","VECTEUR"]
                                 }
@@ -840,7 +811,6 @@ def creation_workflow(args) -> str :
                                 ]
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Création d'un graph pgr'"
                         ]
@@ -1491,7 +1461,6 @@ def creation_workflow(args) -> str :
                                 }
                             }
                         },
-                        // Liste des commentaires ajoutés à la Configuration
                         "comments": [
                             "Configuration d'un flux itinéraire pgr"
                         ]
@@ -1506,11 +1475,9 @@ def creation_workflow(args) -> str :
                     {
                         "type": "offering",
                         "url_parameters": {
-                            // On récupère l'id de la Configuration créée à l'étape précédente grâce à son nom et l'un de ses tags
                             "configuration": "{store_entity.configuration.infos._id [INFOS(name=''' + args.configuration_name_pgr + ''')]}"
                         },
                         "body_parameters": {
-                            // Endpoint de type itineraire
                             "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
                             "visibility": "PUBLIC",
                             "open": true
@@ -1524,20 +1491,16 @@ def creation_workflow(args) -> str :
             "pivot-road2-to-graph-db": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement
                             "processing": "{store_entity.processing.infos._id [INFOS(name=pivot-road2-to-graph-db)]}",
                             "inputs": {
                                 "stored_data": [
-                                    // On récupère l'id de la donnée stockée de type pivot ROAD2
                                     "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_pivot + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On crée une nouvelle Donnée Stockée
                                     "id": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_pgr + ''')]}"
                                 }
                             },
@@ -1666,7 +1629,6 @@ def creation_workflow(args) -> str :
                                 ]
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Création d'un graph pgr'"
                         ]
@@ -1679,11 +1641,9 @@ def creation_workflow(args) -> str :
                     {
                         "type": "offering",
                         "url_parameters": {
-                            // On récupère l'id de la Configuration créée à l'étape précédente grâce à son nom et l'un de ses tags
                             "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_pgr + ''')]})]}"
                         },
                         "body_parameters": {
-                            // Endpoint de type itineraire
                             "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
                             "visibility": "PUBLIC",
                             "open": true
@@ -1697,20 +1657,16 @@ def creation_workflow(args) -> str :
             "pivot-road2-to-graph-osrm": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement
                             "processing": "{store_entity.processing.infos._id [INFOS(name=pivot-road2-to-graph-osrm)]}",
                             "inputs": {
                                 "stored_data": [
-                                    // On récupère l'id de la donnée stockée de type pivot ROAD2
                                     "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_pivot + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On crée une nouvelle Donnée Stockée
                                     "name": "''' + args.stored_data_graph_osrm + '''",
                                     "storage_tags": ["OTHERS","PERF"]
                                 }
@@ -1827,7 +1783,6 @@ def creation_workflow(args) -> str :
                                 ]
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Création d'un graph OSRM"
                         ]
@@ -1883,7 +1838,6 @@ def creation_workflow(args) -> str :
                                 }
                             }
                         },
-                        // Liste des commentaires ajoutés à la Configuration
                         "comments": [
                             "Configuration d'un flux itinéraire osrm"
                         ]
@@ -1898,11 +1852,9 @@ def creation_workflow(args) -> str :
                     {
                         "type": "offering",
                         "url_parameters": {
-                            // On récupère l'id de la Configuration créée à l'étape précédente grâce à son nom et l'un de ses tags
                             "configuration": "{store_entity.configuration.infos._id [INFOS(name=''' + args.configuration_name_osrm + ''')]}"
                         },
                         "body_parameters": {
-                            // Endpoint de type itineraire
                             "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
                             "visibility": "PUBLIC",
                             "open": true
@@ -1918,20 +1870,16 @@ def creation_workflow(args) -> str :
             "pivot-road2-to-graph-osrm": {
                 "actions": [
                     {
-                        // On crée une exécution de traitement
                         "type": "processing-execution",
                         "body_parameters": {
-                            // On récupère l'id du traitement
                             "processing": "{store_entity.processing.infos._id [INFOS(name=pivot-road2-to-graph-osrm)]}",
                             "inputs": {
                                 "stored_data": [
-                                    // On récupère l'id de la donnée stockée de type pivot ROAD2
                                     "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_pivot + ''')]}"
                                 ]
                             },
                             "output": {
                                 "stored_data": {
-                                    // On crée une nouvelle Donnée Stockée
                                     "id": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]}"
                                 }
                             },
@@ -2047,7 +1995,6 @@ def creation_workflow(args) -> str :
                                 ]
                             }
                         },
-                        // Liste des commentaires ajoutés à la Donnée Stockée en sortie de l'exécution du traitement
                         "comments": [
                             "Création d'un graph OSRM"
                         ]
@@ -2060,11 +2007,9 @@ def creation_workflow(args) -> str :
                     {
                         "type": "offering",
                         "url_parameters": {
-                            // On récupère l'id de la Configuration créée à l'étape précédente grâce à son nom et l'un de ses tags
                             "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]})]}"
                         },
                         "body_parameters": {
-                            // Endpoint de type itineraire
                             "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
                             "visibility": "PUBLIC",
                             "open": true
@@ -2088,6 +2033,8 @@ def save_workflow(args, workflow) -> None:
         file.write(workflow)
 
 def run_workflow(args) -> None:
+    """Run the workflow
+    """
     if args.upload is not None :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s mise-en-base")
 
@@ -2100,7 +2047,7 @@ def run_workflow(args) -> None:
     
     if ("valhalla" in args.graph or "all" in args.graph) and args.update == "true" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-valhalla")
-        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-valhalla")
+        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-valhalla --behavior delete")
 
     if ("pgrouting" in args.graph or "all" in args.graph) and args.update == "false" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-db")
@@ -2109,7 +2056,7 @@ def run_workflow(args) -> None:
 
     if ("pgrouting" in args.graph or "all" in args.graph) and args.update == "true" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-db")
-        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-pgr")
+        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-pgr --behavior delete")
 
     if ("osrm" in args.graph or "all" in args.graph) and args.update == "false" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-osrm")
@@ -2118,7 +2065,7 @@ def run_workflow(args) -> None:
 
     if ("osrm" in args.graph or "all" in args.graph) and args.update == "true" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-osrm")
-        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-osrm")
+        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-osrm --behavior delete")
 
 
 def main() -> None:
@@ -2133,7 +2080,7 @@ def main() -> None:
 
     save_workflow(args, workflow)
 
-    if args.run == True :
+    if args.run == "true" :
         run_workflow(args)
 
     sys.exit(0)
