@@ -493,7 +493,7 @@ def creation_workflow(args) -> str :
                             "configuration": "{store_entity.configuration.infos._id [INFOS(name=''' + args.configuration_name_valhalla + ''')]}"
                         },
                         "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
+                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
                             "visibility": "PUBLIC",
                             "open": true
                         }
@@ -659,7 +659,7 @@ def creation_workflow(args) -> str :
                             "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]})]}"
                         },
                         "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
+                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
                             "visibility": "PUBLIC",
                             "open": true
                         }
@@ -1478,7 +1478,7 @@ def creation_workflow(args) -> str :
                             "configuration": "{store_entity.configuration.infos._id [INFOS(name=''' + args.configuration_name_pgr + ''')]}"
                         },
                         "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
+                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
                             "visibility": "PUBLIC",
                             "open": true
                         }
@@ -1644,7 +1644,7 @@ def creation_workflow(args) -> str :
                             "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_pgr + ''')]})]}"
                         },
                         "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
+                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
                             "visibility": "PUBLIC",
                             "open": true
                         }
@@ -1855,7 +1855,7 @@ def creation_workflow(args) -> str :
                             "configuration": "{store_entity.configuration.infos._id [INFOS(name=''' + args.configuration_name_osrm + ''')]}"
                         },
                         "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
+                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
                             "visibility": "PUBLIC",
                             "open": true
                         }
@@ -2010,7 +2010,7 @@ def creation_workflow(args) -> str :
                             "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]})]}"
                         },
                         "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(type=ITINERARY-ISOCURVE)]}",
+                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
                             "visibility": "PUBLIC",
                             "open": true
                         }
