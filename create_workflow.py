@@ -651,18 +651,11 @@ def creation_workflow(args) -> str :
                 ],
                 "parents": ["vector-db-to-pivot-road2"]
             },
-            "publication-itineraire-valhalla": {
+            "synchronisation-offering-valhalla": {
                 "actions": [
                     {
-                        "type": "offering",
-                        "url_parameters": {
-                            "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]})]}"
-                        },
-                        "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
-                            "visibility": "PUBLIC",
-                            "open": true
-                        }
+                        "type": "synchronize-offering",
+                        "filter_infos": {"configuration" : "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]})]}"}
                     }
                 ],
                 "parents": []
@@ -1636,18 +1629,11 @@ def creation_workflow(args) -> str :
                 ],
                 "parents": ["vector-db-to-pivot-road2"]
             },
-            "publication-itineraire-valhalla": {
+            "synchronisation-offering-pgr": {
                 "actions": [
                     {
-                        "type": "offering",
-                        "url_parameters": {
-                            "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_pgr + ''')]})]}"
-                        },
-                        "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
-                            "visibility": "PUBLIC",
-                            "open": true
-                        }
+                        "type": "synchronize-offering",
+                        "filter_infos": {"configuration" : "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_pgr + ''')]})]}"}
                     }
                 ],
                 "parents": []
@@ -2002,18 +1988,11 @@ def creation_workflow(args) -> str :
                 ],
                 "parents": ["vector-db-to-pivot-road2"]
             },
-            "publication-itineraire-osrm": {
+            "synchronisation-offering-osrm": {
                 "actions": [
                     {
-                        "type": "offering",
-                        "url_parameters": {
-                            "configuration": "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]})]}"
-                        },
-                        "body_parameters": {
-                            "endpoint": "{store_entity.endpoint.infos._id [INFOS(technical_name=gpf-road2)]}",
-                            "visibility": "PUBLIC",
-                            "open": true
-                        }
+                        "type": "synchronize-offering",
+                        "filter_infos": {"configuration" : "{store_entity.configuration.infos._id [INFOS(stored_data={store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]})]}"}
                     }
                 ],
                 "parents": [
@@ -2047,7 +2026,7 @@ def run_workflow(args) -> None:
     
     if ("valhalla" in args.graph or "all" in args.graph) and args.update == "true" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-valhalla")
-        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-valhalla --behavior delete")
+        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s synchronisation-offering-valhalla --behavior delete")
 
     if ("pgrouting" in args.graph or "all" in args.graph) and args.update == "false" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-db")
@@ -2056,7 +2035,7 @@ def run_workflow(args) -> None:
 
     if ("pgrouting" in args.graph or "all" in args.graph) and args.update == "true" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-db")
-        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-pgr --behavior delete")
+        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s synchronisation-offering-pgr --behavior delete")
 
     if ("osrm" in args.graph or "all" in args.graph) and args.update == "false" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-osrm")
@@ -2065,7 +2044,7 @@ def run_workflow(args) -> None:
 
     if ("osrm" in args.graph or "all" in args.graph) and args.update == "true" :
         os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s pivot-road2-to-graph-osrm")
-        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s publication-itineraire-osrm --behavior delete")
+        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s synchronisation-offering-osrm --behavior delete")
 
 
 def main() -> None:

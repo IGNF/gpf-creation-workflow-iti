@@ -2,7 +2,7 @@
 Tool to create a workflow itinerary. For use this tool, you need to install the "SDK Python pour la géoplateforme" (https://github.com/Geoplateforme/sdk-entrepot) :
 
 ```
-python3 -m pip install "sdk_entrepot_gpf>=0.1.19"
+python3 -m pip install "sdk_entrepot_gpf>=0.1.21"
 ```
 
 An example of a file config.ini to complete to use the SDK.
