@@ -445,6 +445,20 @@ def creation_workflow(args) -> str :
                                         "optimization": "shortest",
                                         "cost_type": "distance",
                                         "costing": "auto_shorter"
+                                    },
+                                    {
+                                        "profile": "pedestrian",
+                                        "optimization": "shortest",
+                                        "cost_type": "distance",
+                                        "costing": "auto_shorter",
+                                        "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]}"
+                                    },
+                                    {
+                                        "profile": "pedestrian",
+                                        "optimization": "fastest",
+                                        "cost_type": "distance",
+                                        "costing": "auto",
+                                        "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]}"
                                     }
                                 ],
                                 "constraints": {
@@ -675,7 +689,7 @@ def creation_workflow(args) -> str :
                             },
                             "output": {
                                 "stored_data": {
-                                    "name": "''' + args.stored_data_graph_valhalla + '''",
+                                    "name": "''' + args.stored_data_graph_pgr + '''",
                                     "storage_tags": ["IGN","VECTEUR"]
                                 }
                             },
@@ -1787,7 +1801,7 @@ def creation_workflow(args) -> str :
                             "type_infos": {
                                 "title": "itineraire_osrm",
                                 "abstract": "Publication du service Itinéraire via OSRM",
-                                "keywords": ["valhalla", "itineraire", "publication"],
+                                "keywords": ["osrm", "itineraire", "publication"],
                                 "used_data": [
                                     {
                                         "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]}",
