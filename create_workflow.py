@@ -456,7 +456,7 @@ def creation_workflow(args) -> str :
                                     {
                                         "profile": "pedestrian",
                                         "optimization": "fastest",
-                                        "cost_type": "distance",
+                                        "cost_type": "time",
                                         "costing": "auto",
                                         "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]}"
                                     }
