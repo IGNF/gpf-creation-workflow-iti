@@ -450,14 +450,14 @@ def creation_workflow(args) -> str :
                                         "profile": "pedestrian",
                                         "optimization": "shortest",
                                         "cost_type": "distance",
-                                        "costing": "auto_shorter",
+                                        "costing": "pedestrian",
                                         "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]}"
                                     },
                                     {
                                         "profile": "pedestrian",
                                         "optimization": "fastest",
                                         "cost_type": "time",
-                                        "costing": "auto",
+                                        "costing": "pedestrian",
                                         "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_valhalla + ''')]}"
                                     }
                                 ],
@@ -1167,6 +1167,398 @@ def creation_workflow(args) -> str :
                                                 "default": "false"
                                             }
                                         ]
+                                    },
+                                    {
+                                        "profile": "pedestrian",
+                                        "optimization": "fastest",
+                                        "cost_column": "cost_s_pedestrian",
+                                        "reverse_cost_column": "reverse_cost_s_pedestrian",
+                                        "cost_type": "time",
+                                        "attributes": [
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "name",
+                                                "public_name": "name",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "insee_commune_droite",
+                                                "public_name": "insee_commune_droite",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_poids_par_essieu",
+                                                "public_name": "restriction_de_poids_par_essieu",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nature",
+                                                "public_name": "nature",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "importance",
+                                                "public_name": "importance",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "insee_commune_gauche",
+                                                "public_name": "insee_commune_gauche",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "acces_pieton",
+                                                "public_name": "acces_pieton",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "bande_cyclable",
+                                                "public_name": "bande_cyclable",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nombre_de_voies",
+                                                "public_name": "nombre_de_voies",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_poids_total",
+                                                "public_name": "restriction_de_poids_total",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "position_par_rapport_au_sol",
+                                                "public_name": "position_par_rapport_au_sol",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "urbain",
+                                                "public_name": "urbain",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_hauteur",
+                                                "public_name": "restriction_de_hauteur",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "itineraire_vert",
+                                                "public_name": "itineraire_vert",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cleabs",
+                                                "public_name": "cleabs",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "sens_de_circulation",
+                                                "public_name": "sens_de_circulation",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "vitesse_moyenne_vl",
+                                                "public_name": "vitesse_moyenne_vl",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_numero",
+                                                "public_name": "cpx_numero",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_classement_administratif",
+                                                "public_name": "cpx_classement_administratif",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_gestionnaire",
+                                                "public_name": "cpx_gestionnaire",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_toponyme_route_nommee",
+                                                "public_name": "cpx_toponyme_route_nommee",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "acces_vehicule_leger",
+                                                "public_name": "acces_vehicule_leger",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nom_1_gauche",
+                                                "public_name": "nom_1_gauche",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "largeur_de_chaussee",
+                                                "public_name": "largeur_de_chaussee",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nature_de_la_restriction",
+                                                "public_name": "nature_de_la_restriction",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_numero_route_europeenne",
+                                                "public_name": "cpx_numero_route_europeenne",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "reserve_aux_bus",
+                                                "public_name": "reserve_aux_bus",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "matieres_dangereuses_interdites",
+                                                "public_name": "matieres_dangereuses_interdites",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_largeur",
+                                                "public_name": "restriction_de_largeur",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nom_1_droite",
+                                                "public_name": "nom_1_droite",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_longueur",
+                                                "public_name": "restriction_de_longueur",
+                                                "default": false
+                                            }
+                                        ],
+                                        "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_pgr + ''')]}"
+                                    },
+                                    {
+                                        "profile": "pedestrian",
+                                        "optimization": "shortest",
+                                        "cost_column": "cost_m_pedestrian",
+                                        "reverse_cost_column": "reverse_cost_m_pedestrian",
+                                        "cost_type": "distance",
+                                        "attributes": [
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "name",
+                                                "public_name": "name",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "insee_commune_droite",
+                                                "public_name": "insee_commune_droite",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_poids_par_essieu",
+                                                "public_name": "restriction_de_poids_par_essieu",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nature",
+                                                "public_name": "nature",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "importance",
+                                                "public_name": "importance",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "insee_commune_gauche",
+                                                "public_name": "insee_commune_gauche",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "acces_pieton",
+                                                "public_name": "acces_pieton",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "bande_cyclable",
+                                                "public_name": "bande_cyclable",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nombre_de_voies",
+                                                "public_name": "nombre_de_voies",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_poids_total",
+                                                "public_name": "restriction_de_poids_total",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "position_par_rapport_au_sol",
+                                                "public_name": "position_par_rapport_au_sol",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "urbain",
+                                                "public_name": "urbain",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_hauteur",
+                                                "public_name": "restriction_de_hauteur",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "itineraire_vert",
+                                                "public_name": "itineraire_vert",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cleabs",
+                                                "public_name": "cleabs",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "sens_de_circulation",
+                                                "public_name": "sens_de_circulation",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "vitesse_moyenne_vl",
+                                                "public_name": "vitesse_moyenne_vl",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_numero",
+                                                "public_name": "cpx_numero",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_classement_administratif",
+                                                "public_name": "cpx_classement_administratif",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_gestionnaire",
+                                                "public_name": "cpx_gestionnaire",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_toponyme_route_nommee",
+                                                "public_name": "cpx_toponyme_route_nommee",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "acces_vehicule_leger",
+                                                "public_name": "acces_vehicule_leger",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nom_1_gauche",
+                                                "public_name": "nom_1_gauche",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "largeur_de_chaussee",
+                                                "public_name": "largeur_de_chaussee",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nature_de_la_restriction",
+                                                "public_name": "nature_de_la_restriction",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "cpx_numero_route_europeenne",
+                                                "public_name": "cpx_numero_route_europeenne",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "reserve_aux_bus",
+                                                "public_name": "reserve_aux_bus",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "matieres_dangereuses_interdites",
+                                                "public_name": "matieres_dangereuses_interdites",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_largeur",
+                                                "public_name": "restriction_de_largeur",
+                                                "default": false
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "nom_1_droite",
+                                                "public_name": "nom_1_droite",
+                                                "default": true
+                                            },
+                                            {
+                                                "table_name": "ways",
+                                                "native_name": "restriction_de_longueur",
+                                                "public_name": "restriction_de_longueur",
+                                                "default": false
+                                            }
+                                        ],
+                                        "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_pgr + ''')]}"
                                     }
                                 ],
                                 "constraints": {
@@ -1807,6 +2199,16 @@ def creation_workflow(args) -> str :
                                         "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]}",
                                         "profile": "car",
                                         "optimization": "fastest"
+                                    },
+                                    {
+                                        "profile": "pedestrian",
+                                        "optimization": "shortest",
+                                        "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]}"
+                                    },
+                                    {
+                                        "profile": "car",
+                                        "optimization": "shortest",
+                                        "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]}"
                                     }
                                 ],
                                 "constraints": {
