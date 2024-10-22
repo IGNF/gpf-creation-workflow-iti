@@ -48,7 +48,7 @@ def run(args) -> None:
 
     steps = list(data["workflow"]["steps"].keys())
     for step in steps :
-        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s " + step + " --behavior delete")
+        os.system("python3 -m sdk_entrepot_gpf --ini " + str(args.config) + " workflow -f " + str(args.path_file) + " -s " + step + " --behavior DELETE")
 
 def main() -> None:
     """Main function
