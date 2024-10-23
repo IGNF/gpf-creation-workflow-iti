@@ -9,7 +9,7 @@ An example of a file config.ini to complete to use the SDK.
 
 ## create_workflow.py
 
-Tool to create a workflow itinerary with the possibility to run it immediately
+Tool to create a workflow itinerary with the possibility to run it immediately (éviter de faire un update pour pgrouting car cela rend la donnée innaccessible le temps de la mise à jour)
 
 ```
 options:
@@ -56,13 +56,13 @@ python3 create_workflow.py [--options]
 
 ## run_workflow.py
 
-Run a workflow automatically with the option --behavior delete (tke workflow need to not have commentary inside)
+Run a workflow automatically with the option --behavior DELETE (tke workflow need to not have commentary inside)
 
 ```
 options:
   -h, --help            show this help message and exit
   --path_file /path/to/file/to/create
-                        Path to save the workflow
+                        Path to where is the workflow
   --config config.ini   Path to the config file
 ```
 
