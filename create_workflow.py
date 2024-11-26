@@ -244,10 +244,10 @@ def creation_workflow(args) -> str :
                     {
                         "type": "processing-execution",
                         "body_parameters": {
-                            "processing": "{store_entity.processing.infos._id [INFOS(name=vector-db-to-pivot-road2,shared=true)]}",
+                            "processing": "{store_entity.processing.infos._id [INFOS(name=vector-db-to-pivot-road2)]}",
                             "inputs": {
                                 "stored_data": [
-                                    "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_database + ''')]}"
+                                    "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_database + ''',shared=true)]}"
                                 ]
                             },
                             "output": {
