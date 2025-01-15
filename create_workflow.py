@@ -2157,13 +2157,13 @@ def creation_workflow(args) -> str :
                                     {
                                         "profile": "car",
                                         "optimization": "fastest",
-                                        "name" : "cost_m_car",
+                                        "name" : "cost_s_car",
                                         "cost_calculation": "CC_car"
                                     },
                                     {
                                         "profile": "car",
                                         "optimization": "shortest",
-                                        "name" : "cost_s_car",
+                                        "name" : "cost_m_car",
                                         "cost_calculation": "CC_car"
                                     },
                                     {
@@ -2379,13 +2379,13 @@ def creation_workflow(args) -> str :
                                     {
                                         "profile": "car",
                                         "optimization": "fastest",
-                                        "name" : "cost_m_car",
+                                        "name" : "cost_s_car",
                                         "cost_calculation": "CC_car"
                                     },
                                     {
                                         "profile": "car",
                                         "optimization": "shortest",
-                                        "name" : "cost_s_car",
+                                        "name" : "cost_m_car",
                                         "cost_calculation": "CC_car"
                                     },
                                     {
