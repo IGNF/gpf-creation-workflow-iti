@@ -2168,7 +2168,7 @@ def creation_workflow(args) -> str :
                                     },
                                     {
                                         "profile": "pedestrian",
-                                        "optimization": "shortest",
+                                        "optimization": "fastest",
                                         "name" : "cost_s_pedestrian",
                                         "cost_calculation": "CC_car"
                                     }
@@ -2202,7 +2202,7 @@ def creation_workflow(args) -> str :
                                     },
                                     {
                                         "profile": "pedestrian",
-                                        "optimization": "shortest",
+                                        "optimization": "fastest",
                                         "stored_data": "{store_entity.stored_data.infos._id [INFOS(name=''' + args.stored_data_graph_osrm + ''')]}"
                                     },
                                     {
@@ -2390,7 +2390,7 @@ def creation_workflow(args) -> str :
                                     },
                                     {
                                         "profile": "pedestrian",
-                                        "optimization": "shortest",
+                                        "optimization": "fastest",
                                         "name" : "cost_s_pedestrian",
                                         "cost_calculation": "CC_car"
                                     }
